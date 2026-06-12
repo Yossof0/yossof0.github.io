@@ -98,7 +98,7 @@ importers:
         specifier: ^1.2.8
         version: 1.2.8(@types/react-dom@19.2.1(@types/react@19.2.1))(@types/react@19.2.1)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
       axios:
-        specifier: ^1.12.0
+        specifier: ^1.12.2
         version: 1.12.2
       class-variance-authority:
         specifier: ^0.7.1
@@ -125,7 +125,7 @@ importers:
         specifier: ^0.453.0
         version: 0.453.0(react@19.2.1)
       nanoid:
-        specifier: ^5.1.5
+        specifier: ^5.1.6
         version: 5.1.6
       next-themes:
         specifier: ^0.4.6
@@ -142,11 +142,14 @@ importers:
       react-hook-form:
         specifier: ^7.64.0
         version: 7.64.0(react@19.2.1)
+      react-icons:
+        specifier: ^5.6.0
+        version: 5.6.0(react@19.2.1)
       react-resizable-panels:
         specifier: ^3.0.6
         version: 3.0.6(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
       recharts:
-        specifier: ^2.15.2
+        specifier: ^2.15.4
         version: 2.15.4(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
       sonner:
         specifier: ^2.0.7
@@ -164,7 +167,7 @@ importers:
         specifier: ^1.1.2
         version: 1.1.2(@types/react-dom@19.2.1(@types/react@19.2.1))(@types/react@19.2.1)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
       wouter:
-        specifier: ^3.3.5
+        specifier: ^3.7.1
         version: 3.7.1(patch_hash=4e16e6ff3fde7d6c1024d3e0c8605dc9eb6afb690d0d49958c2f449091813072)(react@19.2.1)
       zod:
         specifier: ^4.1.12
@@ -174,10 +177,10 @@ importers:
         specifier: ^0.1.1
         version: 0.1.1(vite@7.1.9(@types/node@24.7.0)(jiti@2.6.1)(lightningcss@1.30.1)(tsx@4.20.6))
       '@tailwindcss/typography':
-        specifier: ^0.5.15
+        specifier: ^0.5.19
         version: 0.5.19(tailwindcss@4.1.14)
       '@tailwindcss/vite':
-        specifier: ^4.1.3
+        specifier: ^4.1.14
         version: 4.1.14(vite@7.1.9(@types/node@24.7.0)(jiti@2.6.1)(lightningcss@1.30.1)(tsx@4.20.6))
       '@types/express':
         specifier: 4.17.21
@@ -201,16 +204,16 @@ importers:
         specifier: ^2.0.6
         version: 2.0.6
       autoprefixer:
-        specifier: ^10.4.20
+        specifier: ^10.4.21
         version: 10.4.21(postcss@8.5.6)
       esbuild:
-        specifier: ^0.25.0
+        specifier: ^0.25.10
         version: 0.25.10
       pnpm:
-        specifier: ^10.15.1
+        specifier: ^10.18.1
         version: 10.18.1
       postcss:
-        specifier: ^8.4.47
+        specifier: ^8.5.6
         version: 8.5.6
       prettier:
         specifier: ^3.6.2
@@ -219,7 +222,7 @@ importers:
         specifier: ^4.1.14
         version: 4.1.14
       tsx:
-        specifier: ^4.19.1
+        specifier: ^4.20.6
         version: 4.20.6
       tw-animate-css:
         specifier: ^1.4.0
@@ -228,13 +231,13 @@ importers:
         specifier: 5.6.3
         version: 5.6.3
       vite:
-        specifier: ^7.1.7
+        specifier: ^7.1.9
         version: 7.1.9(@types/node@24.7.0)(jiti@2.6.1)(lightningcss@1.30.1)(tsx@4.20.6)
       vite-plugin-manus-runtime:
         specifier: ^0.0.57
         version: 0.0.57
       vitest:
-        specifier: ^2.1.4
+        specifier: ^2.1.9
         version: 2.1.9(@types/node@24.7.0)(lightningcss@1.30.1)
 
 packages:
@@ -2987,6 +2990,11 @@ packages:
     engines: {node: '>=18.0.0'}
     peerDependencies:
       react: ^16.8.0 || ^17 || ^18 || ^19
+
+  react-icons@5.6.0:
+    resolution: {integrity: sha512-RH93p5ki6LfOiIt0UtDyNg/cee+HLVR6cHHtW3wALfo+eOHTp8RnU2kRkI6E+H19zMIs03DyxUG/GfZMOGvmiA==}
+    peerDependencies:
+      react: '*'
 
   react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
@@ -6541,6 +6549,10 @@ snapshots:
       scheduler: 0.27.0
 
   react-hook-form@7.64.0(react@19.2.1):
+    dependencies:
+      react: 19.2.1
+
+  react-icons@5.6.0(react@19.2.1):
     dependencies:
       react: 19.2.1
 

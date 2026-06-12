@@ -8,19 +8,22 @@ interface LanguageContextType {
   t: (key: string) => string;
 }
 
-const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
+const LanguageContext = createContext<LanguageContextType | undefined>(
+  undefined
+);
 
 const translations = {
   en: {
     // Navigation
     "nav.github": "GitHub",
     "nav.youtube": "YouTube",
+    "nav.x": "X (Twitter)",
 
     // Hero Section
-    "hero.badge": "Web Developer • 15 years old",
+    "hero.badge": "Web Developer • React & Tailwind Specialist",
     "hero.title": "Building the digital future",
     "hero.description":
-      "I'm a passionate web developer with 3 years of JavaScript experience. I create interactive, beautiful web experiences with smooth animations and modern design principles.",
+      "I build fast, modern websites that help businesses establish a strong online presence. From responsive design to smooth interactions, every project is crafted to showcase your business and convert visitors into customers.",
     "hero.viewProjects": "View My Projects",
     "hero.github": "GitHub",
 
@@ -32,6 +35,25 @@ const translations = {
     "skills.designItems": "Animations,3D Graphics,UI/UX,Responsive Design",
     "skills.tools": "Tools & Technologies",
     "skills.toolsItems": "Git,Browser APIs,Web Extensions,Modern Web Standards",
+
+    // What I Can Build Section
+    "services.title": "What I Can Build",
+    "services.subtitle": "Solutions tailored for your business",
+    "services.businessWebsites": "Business Websites",
+    "services.businessWebsitesDesc":
+      "Professional websites that showcase your brand and build trust with customers",
+    "services.landingPages": "Landing Pages",
+    "services.landingPagesDesc":
+      "High-converting landing pages designed to capture leads and drive sales",
+    "services.ecommerce": "E-commerce Stores",
+    "services.ecommerceDesc":
+      "Complete online stores with shopping carts and payment integration",
+    "services.dashboards": "Interactive Dashboards",
+    "services.dashboardsDesc":
+      "Data visualization and management tools for businesses",
+    "services.educational": "Educational Platforms",
+    "services.educationalDesc":
+      "Interactive learning platforms and course websites",
 
     // Projects Section
     "projects.title": "Featured Projects",
@@ -69,10 +91,12 @@ const translations = {
     // CTA Section
     "cta.title": "Let's Create Something Amazing",
     "cta.subtitle":
-      "I'm always interested in hearing about new projects and opportunities",
+      "Need a modern website, dashboard, or web application? Let's bring your idea to life.",
+    "cta.contact": "Contact Me",
     "cta.github": "GitHub",
     "cta.youtube": "YouTube",
     "cta.facebook": "Facebook",
+    "cta.x": "X (Twitter)",
 
     // Footer
     "footer.name": "Yossof Abdelwahed",
@@ -92,13 +116,13 @@ const translations = {
     "nav.github": "جيتهاب",
     "nav.youtube": "يوتيوب",
     "nav.facebook": "فيس بوك",
-
+    "nav.x": "أكس (تويتر)",
 
     // Hero Section
-    "hero.badge": "مطور ويب • 15 سنة",
+    "hero.badge": "مطور ويب • متخصص React و Tailwind",
     "hero.title": "بناء المستقبل الرقمي",
     "hero.description":
-      "أنا مطور ويب شغوف بـ 3 سنوات من خبرة JavaScript. أنشئ تجارب ويب تفاعلية وجميلة مع رسوم متحركة سلسة ومبادئ تصميم حديثة.",
+      "أبني مواقع ويب سريعة وحديثة تساعد الأعمال على إنشاء حضور قوي عبر الإنترنت. من التصميم سريع الاستجابة إلى التفاعلات السلسة، يتم حرفة كل مشروع لعرض عملك وتحويل الزوار إلى عملاء.",
     "hero.viewProjects": "عرض مشاريعي",
     "hero.github": "جيتهاب",
 
@@ -107,9 +131,28 @@ const translations = {
     "skills.frontend": "تطوير الواجهات الأمامية",
     "skills.frontendItems": "React,JavaScript,Tailwind CSS,HTML/CSS",
     "skills.design": "التصميم التفاعلي",
-    "skills.designItems": "الرسوم المتحركة,الرسوميات ثلاثية الأبعاد,تصميم الواجهات,التصميم المتجاوب",
+    "skills.designItems":
+      "الرسوم المتحركة,الرسوميات ثلاثية الأبعاد,تصميم الواجهات,التصميم المتجاوب",
     "skills.tools": "الأدوات والتقنيات",
-    "skills.toolsItems": "Git,واجهات المتصفح,امتدادات المتصفح,معايير الويب الحديثة",
+    "skills.toolsItems":
+      "Git,واجهات المتصفح,امتدادات المتصفح,معايير الويب الحديثة",
+
+    // What I Can Build Section
+    "services.title": "ماذا يمكنني أن أبني",
+    "services.subtitle": "حلول مصممة خصيصاً لعملك",
+    "services.businessWebsites": "مواقع الأعمال",
+    "services.businessWebsitesDesc":
+      "مواقع ويب احترافية تعرض علامتك التجارية وتبني الثقة مع العملاء",
+    "services.landingPages": "صفحات الهبوط",
+    "services.landingPagesDesc":
+      "صفحات هبوط عالية التحويل مصممة لالتقاط العملاء المحتملين وزيادة المبيعات",
+    "services.ecommerce": "متاجر التجارة الإلكترونية",
+    "services.ecommerceDesc":
+      "متاجر عبر الإنترنت كاملة مع سلات التسوق وتكامل الدفع",
+    "services.dashboards": "لوحات التحكم التفاعلية",
+    "services.dashboardsDesc": "أدوات تصور البيانات والإدارة للأعمال",
+    "services.educational": "منصات التعليم",
+    "services.educationalDesc": "منصات التعلم التفاعلية ومواقع الدورات",
 
     // Projects Section
     "projects.title": "المشاريع المميزة",
@@ -147,13 +190,15 @@ const translations = {
     // CTA Section
     "cta.title": "لننشئ شيئاً مذهلاً",
     "cta.subtitle":
-      "أنا مهتم دائماً بسماع مشاريع وفرص جديدة",
+      "هل تحتاج إلى موقع ويب حديث أو لوحة تحكم أو تطبيق ويب؟ دعنا نحقق فكرتك.",
+    "cta.contact": "تواصل معي",
     "cta.github": "جيتهاب",
     "cta.youtube": "يوتيوب",
     "cta.facebook": "فيس بوك",
+    "cta.x": "أكس (تويتر)",
     // Footer
     "footer.name": "يوسف عبدالواحد",
-    "footer.links": "جيتهاب,يوتيوب,فيس بوك",
+    "footer.links": "جيتهاب,يوتيوب,فيس بوك,أكس (تويتر)",
     "footer.copyright": "© 2026 يوسف عبدالواحد. جميع الحقوق محفوظة.",
 
     // Contact
@@ -170,7 +215,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [language, setLanguage] = useState<Language>("en");
 
   const toggleLanguage = () => {
-    setLanguage((prev) => (prev === "en" ? "ar" : "en"));
+    setLanguage(prev => (prev === "en" ? "ar" : "en"));
   };
 
   const t = (key: string): string => {

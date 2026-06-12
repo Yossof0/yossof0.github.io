@@ -1,5 +1,16 @@
 import { Button } from "@/components/ui/button";
-import { ExternalLink, Github, Youtube, Mail, Phone, Globe, Sun, Moon, Facebook } from "lucide-react";
+import {
+  ExternalLink,
+  Github,
+  Youtube,
+  Mail,
+  Phone,
+  Globe,
+  Sun,
+  Moon,
+  Facebook,
+} from "lucide-react";
+import { FaXTwitter } from "react-icons/fa6";
 import { useEffect, useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTheme } from "@/contexts/ThemeContext";
@@ -187,6 +198,18 @@ export default function Home() {
             >
               <Youtube size={20} />
             </a>
+            <a
+              href="https://www.x.com/OverClock33"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`transition-colors ${
+                theme === "dark"
+                  ? "text-gray-400 hover:text-blue-400"
+                  : "text-gray-600 hover:text-blue-600"
+              }`}
+            >
+              <FaXTwitter size={20} />
+            </a>
           </div>
         </div>
       </nav>
@@ -365,10 +388,86 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Contact Section */}
+      {/* What I Can Build Section */}
       <section
         className={`py-20 relative overflow-hidden transition-colors duration-300 ${
           theme === "dark" ? "bg-gray-950" : "bg-white"
+        }`}
+      >
+        <div className="container relative z-10">
+          <h2
+            className={`text-4xl font-bold mb-4 transition-colors duration-300 ${
+              theme === "dark" ? "text-white" : "text-gray-900"
+            } ${isArabic ? "text-right" : ""}`}
+          >
+            {t("services.title")}
+          </h2>
+          <p
+            className={`mb-12 text-lg transition-colors duration-300 ${
+              theme === "dark" ? "text-gray-400" : "text-gray-600"
+            } ${isArabic ? "text-right" : ""}`}
+          >
+            {t("services.subtitle")}
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                titleKey: "services.businessWebsites",
+                descKey: "services.businessWebsitesDesc",
+              },
+              {
+                titleKey: "services.landingPages",
+                descKey: "services.landingPagesDesc",
+              },
+              {
+                titleKey: "services.ecommerce",
+                descKey: "services.ecommerceDesc",
+              },
+              {
+                titleKey: "services.dashboards",
+                descKey: "services.dashboardsDesc",
+              },
+              {
+                titleKey: "services.educational",
+                descKey: "services.educationalDesc",
+              },
+            ].map((service, idx) => (
+              <div
+                key={idx}
+                className={`p-8 rounded-lg border transition-all duration-300 ${
+                  theme === "dark"
+                    ? "bg-gray-800 border-gray-700 hover:border-blue-500"
+                    : "bg-white border-gray-200 hover:border-blue-300"
+                } hover:shadow-lg ${isArabic ? "text-right" : ""}`}
+                style={{
+                  animation: `slideUp 0.6s ease-out ${idx * 0.1}s both`,
+                }}
+              >
+                <h3
+                  className={`text-xl font-semibold mb-3 transition-colors duration-300 ${
+                    theme === "dark" ? "text-white" : "text-gray-900"
+                  }`}
+                >
+                  {t(service.titleKey)}
+                </h3>
+                <p
+                  className={`transition-colors duration-300 ${
+                    theme === "dark" ? "text-gray-300" : "text-gray-600"
+                  }`}
+                >
+                  {t(service.descKey)}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section
+        className={`py-20 relative overflow-hidden transition-colors duration-300 ${
+          theme === "dark" ? "bg-gray-900" : "bg-gray-50"
         }`}
       >
         <div className="container relative z-10">
@@ -654,6 +753,16 @@ export default function Home() {
                 {t("cta.facebook")}
               </Button>
             </a>
+            <a
+              href="https://www.x.com/OverClock33"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-6 text-lg rounded-lg transition-all">
+                <FaXTwitter size={20} className={isArabic ? "ml-2" : "mr-2"} />
+                {t("cta.x")}
+              </Button>
+            </a>
           </div>
         </div>
       </section>
@@ -701,6 +810,14 @@ export default function Home() {
                 className="hover:text-white transition-colors"
               >
                 Facebook
+              </a>
+              <a
+                href="https://www.x.com/OverClock33/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white transition-colors"
+              >
+                X (Twitter)
               </a>
             </div>
           </div>
