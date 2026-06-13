@@ -77,11 +77,15 @@ const translations = {
     "project.rubiks.desc":
       "An interactive educational platform where I post tutorials teaching how to solve Rubik's cubes with step-by-step guides and visual demonstrations.",
     "project.rubiks.tags": "JavaScript,3D Graphics,Education",
+    "project.ticxo.title": "Tic Tac Toe Website",
+    "project.ticxo.desc":
+      "A vibrant tic tac toe website featuring interactive elements, Step by step tutorials, and engaging content for players of all ages.",
+    "project.ticxo.tags": "React,JavaScript,Game Development",
 
-    "project.wordComb.title": "Word Combinations",
+    "project.wordComb.title": "Word Combination Generator",
     "project.wordComb.desc":
-      "A utility tool for generating and exploring word combinations with an intuitive interface.",
-    "project.wordComb.tags": "JavaScript,Utility",
+      "A utility tool for generating and exploring word combinations with an intuitive interface, A Game Mode for boredom, And Excellent Accuracy",
+    "project.wordComb.tags": "JavaScript,Utility,Algorithms",
 
     "project.mathTable.title": "Math Table Generator",
     "project.mathTable.desc":

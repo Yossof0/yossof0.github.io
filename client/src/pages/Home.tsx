@@ -61,6 +61,14 @@ const projects: Project[] = [
   },
   {
     id: "4",
+    titleKey: "project.ticxo.title",
+    descKey: "project.ticxo.desc",
+    tagsKey: "project.ticxo.tags",
+    link: "https://yossof0.github.io/TicXO",
+    featured: true,
+  },
+  {
+    id: "5",
     titleKey: "project.wordComb.title",
     descKey: "project.wordComb.desc",
     tagsKey: "project.wordComb.tags",
@@ -68,7 +76,7 @@ const projects: Project[] = [
     featured: false,
   },
   {
-    id: "5",
+    id: "6",
     titleKey: "project.mathTable.title",
     descKey: "project.mathTable.desc",
     tagsKey: "project.mathTable.tags",
