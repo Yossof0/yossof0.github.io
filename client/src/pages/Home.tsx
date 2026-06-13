@@ -72,7 +72,7 @@ const projects: Project[] = [
     titleKey: "project.wordComb.title",
     descKey: "project.wordComb.desc",
     tagsKey: "project.wordComb.tags",
-    link: "https://yossof0.github.io/Word-Combination",
+    link: "https://yossof0.github.io/Combs",
     featured: false,
   },
   {
