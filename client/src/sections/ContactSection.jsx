@@ -5,16 +5,34 @@ import { useLang } from "../contexts/LangContext";
 import Footer from "../components/Footer";
 
 // ─── REPLACE THESE with your EmailJS credentials ───────────────
-const EMAILJS_SERVICE_ID  = "YOUR_SERVICE_ID";
-const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID";
-const EMAILJS_PUBLIC_KEY  = "YOUR_PUBLIC_KEY";
+const EMAILJS_SERVICE_ID = "service_0xioeyk";
+const EMAILJS_TEMPLATE_ID = "template_pafvk1f";
+const EMAILJS_PUBLIC_KEY = "Ezwb-ggi5WVMwD3dK";
 // ────────────────────────────────────────────────────────────────
 
 const INFO_ITEMS = (t, isAr) => [
-  { icon: "✉️", label: t("Email", "البريد الإلكتروني"), value: socials.email, href: `mailto:${socials.email}` },
-  { icon: "📍", label: t("Location", "الموقع"), value: t(personalInfo.location, personalInfo.locationAr) },
-  { icon: "📞", label: t("Phone", "الهاتف"), value: personalInfo.phone, href: `tel:${personalInfo.phone}` },
-  { icon: "🕐", label: t("Office Hours", "ساعات العمل"), value: t(personalInfo.officeHours, personalInfo.officeHoursAr) },
+  {
+    icon: "✉️",
+    label: t("Email", "البريد الإلكتروني"),
+    value: socials.email,
+    href: `mailto:${socials.email}`,
+  },
+  {
+    icon: "📍",
+    label: t("Location", "الموقع"),
+    value: t(personalInfo.location, personalInfo.locationAr),
+  },
+  {
+    icon: "📞",
+    label: t("Phone", "الهاتف"),
+    value: personalInfo.phone,
+    href: `tel:${personalInfo.phone}`,
+  },
+  {
+    icon: "🕐",
+    label: t("Office Hours", "ساعات العمل"),
+    value: t(personalInfo.officeHours, personalInfo.officeHoursAr),
+  },
 ];
 
 export default function ContactSection({ setActive }) {
@@ -23,7 +41,7 @@ export default function ContactSection({ setActive }) {
   const [status, setStatus] = useState(null); // null | 'sending' | 'success' | 'error'
   const [charCount, setCharCount] = useState(0);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
     setStatus("sending");
     try {
@@ -61,13 +79,18 @@ export default function ContactSection({ setActive }) {
       <div className="contact-grid">
         {/* Left: Info */}
         <div className="contact-info">
-          {INFO_ITEMS(t, isAr).map((item) => (
+          {INFO_ITEMS(t, isAr).map(item => (
             <div key={item.label} className="contact-item">
               <div className="contact-item-icon">{item.icon}</div>
               <div>
                 <div className="contact-item-label">{item.label}</div>
                 {item.href ? (
-                  <a href={item.href} className="contact-item-value" style={{ color: "var(--text)", textDecoration: "none" }} data-hover>
+                  <a
+                    href={item.href}
+                    className="contact-item-value"
+                    style={{ color: "var(--text)", textDecoration: "none" }}
+                    data-hover
+                  >
                     {item.value}
                   </a>
                 ) : (
@@ -82,46 +105,87 @@ export default function ContactSection({ setActive }) {
         <form ref={formRef} className="form" onSubmit={handleSubmit}>
           <div className="form-row">
             <div className="form-group">
-              <label className="form-label" htmlFor="from_name">{t("Name", "الاسم")}</label>
-              <input id="from_name" name="from_name" type="text" className="form-input"
-                placeholder={t("Your name", "اسمك")} required />
+              <label className="form-label" htmlFor="from_name">
+                {t("Name", "الاسم")}
+              </label>
+              <input
+                id="from_name"
+                name="from_name"
+                type="text"
+                className="form-input"
+                placeholder={t("Your name", "اسمك")}
+                required
+              />
             </div>
             <div className="form-group">
-              <label className="form-label" htmlFor="reply_to">{t("Email", "البريد الإلكتروني")}</label>
-              <input id="reply_to" name="reply_to" type="email" className="form-input"
-                placeholder={t("your@email.com", "بريدك@مثال.com")} required />
+              <label className="form-label" htmlFor="reply_to">
+                {t("Email", "البريد الإلكتروني")}
+              </label>
+              <input
+                id="reply_to"
+                name="reply_to"
+                type="email"
+                className="form-input"
+                placeholder={t("your@email.com", "بريدك@مثال.com")}
+                required
+              />
             </div>
           </div>
 
           <div className="form-group">
-            <label className="form-label" htmlFor="subject">{t("Subject", "الموضوع")}</label>
-            <input id="subject" name="subject" type="text" className="form-input"
-              placeholder={t("What's this about?", "موضوع الرسالة")} required />
+            <label className="form-label" htmlFor="subject">
+              {t("Subject", "الموضوع")}
+            </label>
+            <input
+              id="subject"
+              name="subject"
+              type="text"
+              className="form-input"
+              placeholder={t("What's this about?", "موضوع الرسالة")}
+              required
+            />
           </div>
 
           <div className="form-group">
-            <label className="form-label" htmlFor="message">{t("Message", "الرسالة")}</label>
-            <textarea id="message" name="message" className="form-textarea"
+            <label className="form-label" htmlFor="message">
+              {t("Message", "الرسالة")}
+            </label>
+            <textarea
+              id="message"
+              name="message"
+              className="form-textarea"
               placeholder={t("Your message…", "رسالتك…")}
-              maxLength={1000} required
-              onChange={(e) => setCharCount(e.target.value.length)}
+              maxLength={1000}
+              required
+              onChange={e => setCharCount(e.target.value.length)}
             />
             <div className="form-count">{charCount}/1000</div>
           </div>
 
           {status === "success" && (
             <div className="form-status success">
-              {t("✅ Message sent! I'll get back to you soon.", "✅ تم إرسال الرسالة! سأرد عليك قريباً.")}
+              {t(
+                "✅ Message sent! I'll get back to you soon.",
+                "✅ تم إرسال الرسالة! سأرد عليك قريباً."
+              )}
             </div>
           )}
           {status === "error" && (
             <div className="form-status error">
-              {t("❌ Something went wrong. Try emailing me directly.", "❌ حدث خطأ. جرّب مراسلتي مباشرة.")}
+              {t(
+                "❌ Something went wrong. Try emailing me directly.",
+                "❌ حدث خطأ. جرّب مراسلتي مباشرة."
+              )}
             </div>
           )}
 
-          <button type="submit" className="btn-primary" disabled={status === "sending"} data-hover
-            style={{ alignSelf: "flex-end" }}>
+          <button
+            type="submit"
+            className="btn-primary"
+            disabled={status === "sending"}
+            data-hover
+            style={{ alignSelf: "flex-end" }}
+          >
             {status === "sending"
               ? t("Sending…", "جاري الإرسال…")
               : t("Send Message 🚀", "إرسال الرسالة 🚀")}
