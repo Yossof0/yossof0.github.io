@@ -380,11 +380,13 @@ body {
   color: var(--text);
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
+  line-height: 1;
 }
-.section-title .icon {
-  color: var(--accent);
-  font-size: 1.4rem;
+.section-title svg {
+  flex-shrink: 0;
+  position: relative;
+  top: 0;
 }
 .section-line {
   width: 48px;
