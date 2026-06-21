@@ -2,6 +2,7 @@ export const projects = [
   {
     id: 1,
     name: "TTT Pro",
+    image: "/projects/ttt-pro.png",
     nameAr: "تيك تاك تو برو",
     description:
       "A feature-rich Tic Tac Toe web app with AI opponent, Learn Mode that teaches strategy step by step, multiple difficulty levels, dark mode, and sound effects.",
@@ -16,6 +17,7 @@ export const projects = [
   {
     id: 2,
     name: "Narcissus",
+    image: "/projects/narcissus.png",
     nameAr: "نرجس",
     description:
       "A full-stack e-commerce platform for a premium handmade products brand. Features include auth, admin/owner panels, multi-language support, theming, and a Supabase + PostgreSQL backend deployed on Railway.",
@@ -30,6 +32,7 @@ export const projects = [
   {
     id: 3,
     name: "Word Combination Calculator",
+    image: "/projects/word-combination.png",
     nameAr: "حاسبة تركيب الكلمات",
     description:
       "Generates all permutations from a set of letters, checks them against English/Arabic dictionaries via Wiktionary API, includes advanced filters, letter frequency stats, a Word Challenge quiz mode, localStorage saved sets, and URL state sharing.",
@@ -44,6 +47,7 @@ export const projects = [
   {
     id: 4,
     name: "Shelfify",
+    image: "/projects/shelfify.png",
     nameAr: "شيلفيفاي",
     description:
       "A Point-of-Sale & Product Manager app. Manage your product catalog, track purchases, and view transaction history — all from a clean, keyboard-friendly interface.",
@@ -58,6 +62,7 @@ export const projects = [
   {
     id: 5,
     name: "Custom Grab Cursor Extension",
+    image: "/projects/custom-grab-cursor.png",
     nameAr: "إضافة المؤشر المخصص",
     description:
       "A browser extension that replaces the default cursor with a custom grab animation. Provides smooth animations and interactive feedback for a more engaging browsing experience.",
@@ -72,6 +77,7 @@ export const projects = [
   {
     id: 6,
     name: "Rubik's Cube Teaching Website",
+    image: "/projects/rubiks-cube.png",
     nameAr: "موقع تعليم مكعب روبيك",
     description:
       "An interactive educational platform with step-by-step tutorials and 3D visual demonstrations for solving Rubik's cubes. Built for beginners and intermediate solvers.",

@@ -24,6 +24,12 @@ export default function ProjectModal({ project, onClose }) {
       <div className="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
         <button className="modal-close" onClick={onClose} aria-label="Close" data-hover>✕</button>
 
+        {project.image && (
+          <div className="modal-thumb">
+            <img src={project.image} alt={name} />
+          </div>
+        )}
+
         <div style={{ fontSize: "11px", color: "var(--accent)", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 8 }}>
           {project.category}
         </div>
