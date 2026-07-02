@@ -244,8 +244,8 @@ body {
   opacity: 0.32;
 }
 [data-theme="light"] .hero-bg-photo {
-  opacity: 0.6;
-  filter: brightness(0.6) saturate(0.8);
+  opacity: 0.4;
+  filter: brightness(1) saturate(0.8);
 }
 .hero::before {
   content: "";
