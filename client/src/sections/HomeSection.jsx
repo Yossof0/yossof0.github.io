@@ -35,6 +35,15 @@ export default function HomeSection({ setActive }) {
       <section className="section">
         <div className="hero">
           <img src="/images/hero-bg.jpg" alt="" className="hero-bg-photo" />
+
+          {/* Sunset profile photo — right side decoration */}
+          <img
+            src="/images/hero-profile.png"
+            alt=""
+            className="hero-profile-photo"
+            aria-hidden="true"
+          />
+
           <div className="hero-badge">
             <span className="dot" />
             {t(personalInfo.availability, personalInfo.availabilityAr)}
@@ -56,13 +65,18 @@ export default function HomeSection({ setActive }) {
 
           <div className="hero-actions">
             <button
-              className="btn-primary"
+              className="btn-primary btn-ripple"
               onClick={() => setActive("contact")}
               data-hover
             >
               {t("Let's Talk →", "تحدث معي ←")}
             </button>
-            <a href="/resume.pdf" download className="btn-outline" data-hover>
+            <a
+              href="/resume.pdf"
+              download
+              className="btn-outline btn-ripple"
+              data-hover
+            >
               <Download size={15} strokeWidth={2} />
               {t("Resume", "السيرة الذاتية")}
             </a>
@@ -137,7 +151,7 @@ export default function HomeSection({ setActive }) {
           </div>
           <div style={{ textAlign: "center", marginTop: 24 }}>
             <button
-              className="btn-outline"
+              className="btn-outline btn-ripple"
               onClick={() => setActive("projects")}
               data-hover
               style={{ fontSize: "14px", padding: "10px 24px" }}

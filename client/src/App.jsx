@@ -8,27 +8,40 @@ import AboutSection from "./sections/AboutSection";
 import ProjectsSection from "./sections/ProjectsSection";
 import ContactSection from "./sections/ContactSection";
 import BusinessSection from "./sections/BusinessSection";
+import GallerySection from "./sections/GallerySection";
 import "./index.css";
+
+const SECTIONS = {
+  home: HomeSection,
+  about: AboutSection,
+  projects: ProjectsSection,
+  contact: ContactSection,
+  business: BusinessSection,
+  gallery: GallerySection,
+};
 
 function Portfolio() {
   const [active, setActive] = useState("home");
+  const [prev, setPrev] = useState(null);
+  const [animKey, setAnimKey] = useState(0);
 
-  const renderSection = () => {
-    switch (active) {
-      case "home":     return <HomeSection     key="home"     setActive={setActive} />;
-      case "about":    return <AboutSection    key="about"    setActive={setActive} />;
-      case "projects": return <ProjectsSection key="projects" setActive={setActive} />;
-      case "contact":  return <ContactSection  key="contact"  setActive={setActive} />;
-      case "business": return <BusinessSection key="business" setActive={setActive} />;
-      default:         return <HomeSection     key="home"     setActive={setActive} />;
-    }
+  const navigate = id => {
+    if (id === active) return;
+    setPrev(active);
+    setActive(id);
+    setAnimKey(k => k + 1);
+    window.scrollTo({ top: 0, behavior: "instant" });
   };
+
+  const Section = SECTIONS[active] || HomeSection;
 
   return (
     <>
       <Cursor />
-      {renderSection()}
-      <Navbar active={active} setActive={setActive} />
+      <div key={animKey} className="page-transition">
+        <Section setActive={navigate} />
+      </div>
+      <Navbar active={active} setActive={navigate} />
     </>
   );
 }

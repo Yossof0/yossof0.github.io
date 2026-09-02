@@ -115,7 +115,7 @@ export const socials = {
   twitter: "https://x.com/Overclock33",
   youtube: "https://youtube.com/@OverClock33",
   linkedin: "https://www.linkedin.com/in/yossof-abdelwahed-20b2b1408",
-  email: "yossef2989@gmail.com",
+  email: "yossef0bus@gmail.com",
 };
 
 export const personalInfo = {
