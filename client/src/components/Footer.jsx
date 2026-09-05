@@ -11,8 +11,15 @@ import {
 } from "lucide-react";
 
 const SOCIAL_ICONS = [
-  { key: "website", href: socials.website, Icon: Globe, label: "Website" },
   { key: "github", href: socials.github, Icon: Github, label: "GitHub" },
+  { key: "youtube", href: socials.youtube, Icon: Youtube, label: "YouTube" },
+  {
+    key: "linkedin",
+    href: socials.linkedin,
+    Icon: Linkedin,
+    label: "LinkedIn",
+  },
+  { key: "email", href: `mailto:${socials.email}`, Icon: Mail, label: "Email" },
   {
     key: "facebook",
     href: socials.facebook,
@@ -25,14 +32,7 @@ const SOCIAL_ICONS = [
     Icon: Twitter,
     label: "Twitter / X",
   },
-  { key: "youtube", href: socials.youtube, Icon: Youtube, label: "YouTube" },
-  {
-    key: "linkedin",
-    href: socials.linkedin,
-    Icon: Linkedin,
-    label: "LinkedIn",
-  },
-  { key: "email", href: `mailto:${socials.email}`, Icon: Mail, label: "Email" },
+  { key: "website", href: socials.website, Icon: Globe, label: "Website" },
 ];
 
 export default function Footer({ setActive }) {
@@ -42,31 +42,26 @@ export default function Footer({ setActive }) {
   return (
     <footer className="footer">
       <div className="footer-inner">
-        <div>
+        {/* Col 1 — Name + bio */}
+        <div className="footer-brand">
           <div className="footer-name">Yossof0</div>
-          <div className="footer-sub">
-            {t("Web Developer · Cairo, Egypt", "مطور ويب · القاهرة، مصر")}
-          </div>
+          <p className="footer-bio">
+            {t(
+              "Frontend & Full-Stack Web Developer. Building clean, fast web experiences for clients worldwide.",
+              "مطور ويب متكامل. أبني تجارب ويب نظيفة وسريعة للعملاء حول العالم."
+            )}
+          </p>
         </div>
 
-        <div className="footer-links">
-          <span
-            style={{
-              fontSize: "11px",
-              fontWeight: 700,
-              color: "var(--text3)",
-              textTransform: "uppercase",
-              letterSpacing: "0.07em",
-              marginBottom: 4,
-            }}
-          >
+        {/* Col 2 — Quick Links */}
+        <div className="footer-links-col">
+          <div className="footer-col-title">
             {t("Quick Links", "روابط سريعة")}
-          </span>
+          </div>
           {[
             { id: "about", en: "About", ar: "عني" },
             { id: "projects", en: "Projects", ar: "المشاريع" },
             { id: "contact", en: "Contact", ar: "تواصل" },
-            { id: "business", en: "Business", ar: "خدماتي" },
           ].map(l => (
             <button
               key={l.id}
@@ -85,37 +80,51 @@ export default function Footer({ setActive }) {
           ))}
         </div>
 
-        <div className="footer-socials">
-          {SOCIAL_ICONS.map(({ key, href, Icon, label }) => (
-            <a
-              key={key}
-              href={href}
-              target={key !== "email" ? "_blank" : undefined}
-              rel="noopener noreferrer"
-              className="social-icon"
-              title={label}
-              aria-label={label}
-              data-hover
-            >
-              <Icon size={16} strokeWidth={1.8} />
-            </a>
-          ))}
+        {/* Col 3 — Connect */}
+        <div className="footer-connect-col">
+          <div className="footer-col-title">{t("Connect", "تواصل")}</div>
+          <div className="footer-social-grid">
+            {SOCIAL_ICONS.map(({ key, href, Icon, label }) => (
+              <a
+                key={key}
+                href={href}
+                target={key !== "email" ? "_blank" : undefined}
+                rel="noopener noreferrer"
+                className="footer-social-btn"
+                title={label}
+                aria-label={label}
+                data-hover
+              >
+                <Icon size={16} strokeWidth={1.8} />
+              </a>
+            ))}
+          </div>
         </div>
       </div>
 
+      {/* Bottom bar */}
       <div className="footer-bottom">
-        © {year} Yossof Abdelwahed ·{" "}
-        <a
-          href={socials.website}
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{ color: "var(--accent)", textDecoration: "none" }}
+        <span>
+          © {year} Yossof Abdelwahed |{" "}
+          <a
+            href={socials.website}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: "var(--accent)", textDecoration: "none" }}
+            data-hover
+          >
+            yossof0.github.io
+          </a>
+          . {t("All rights reserved.", "جميع الحقوق محفوظة.")}
+        </span>
+        <button
+          className="footer-top-btn"
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          aria-label="Back to top"
           data-hover
         >
-          yossof0.github.io
-        </a>
-        {" · "}
-        {t("Built with React & ❤️", "صُنع بـ React و ❤️")}
+          ↑
+        </button>
       </div>
     </footer>
   );

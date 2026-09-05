@@ -1,9 +1,17 @@
 import { useState, useMemo } from "react";
-import { projects } from "../data/projects";
+import { projects, socials } from "../data/projects";
 import { useLang } from "../contexts/LangContext";
 import ProjectModal from "../components/ProjectModal";
 import Footer from "../components/Footer";
-import { Code2, Rocket, Github } from "lucide-react";
+import {
+  Code2,
+  LayoutGrid,
+  List,
+  Github,
+  ExternalLink,
+  ArrowUpRight,
+} from "lucide-react";
+import { useScrollReveal } from "../hooks/useScrollReveal";
 
 const CATEGORIES = ["All", "Web", "Extension"];
 
@@ -12,97 +20,227 @@ export default function ProjectsSection({ setActive }) {
   const [filter, setFilter] = useState("All");
   const [search, setSearch] = useState("");
   const [selected, setSelected] = useState(null);
+  const [viewMode, setViewMode] = useState("grid"); // "list" | "grid"
+  const [hoverPreview, setHoverPreview] = useState(null); // for list view hover
+  const ref = useScrollReveal();
 
   const filtered = useMemo(() => {
-    return projects.filter((p) => {
+    return projects.filter(p => {
       const matchCat = filter === "All" || p.category === filter;
       const q = search.toLowerCase();
       const matchSearch =
         !q ||
         p.name.toLowerCase().includes(q) ||
         (p.nameAr && p.nameAr.includes(q)) ||
-        p.tags.some((tag) => tag.toLowerCase().includes(q)) ||
-        p.description.toLowerCase().includes(q);
+        p.tags.some(tag => tag.toLowerCase().includes(q));
       return matchCat && matchSearch;
     });
   }, [filter, search]);
 
+  const getCatCount = cat =>
+    projects.filter(p => cat === "All" || p.category === cat).length;
+
   return (
     <>
-      <section className="section">
-        <div className="section-header">
-          <h2 className="section-title">
-            <Code2 size={22} strokeWidth={2} color="var(--accent)" />
-            {t("Projects", "المشاريع")}
-          </h2>
-          <div className="section-line" />
-        </div>
-
-        <div className="filter-bar">
-          {CATEGORIES.map((cat) => (
-            <button
-              key={cat}
-              className={`filter-btn ${filter === cat ? "active" : ""}`}
-              onClick={() => setFilter(cat)}
+      <section className="section projects-section" ref={ref}>
+        {/* ── Big centered title ── */}
+        <div className="projects-hero reveal">
+          <h1 className="projects-big-title">{t("My Projects", "مشاريعي")}</h1>
+          <p className="projects-subtitle">
+            {t(
+              "A collection of web apps, tools, and extensions I've built.",
+              "مجموعة من تطبيقات الويب والأدوات والإضافات التي بنيتها."
+            )}
+          </p>
+          <div className="projects-hero-actions">
+            <a
+              href={socials.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary btn-ripple"
               data-hover
             >
-              {cat === "All" ? t("All", "الكل") : cat === "Web" ? t("Web", "ويب") : t("Extensions", "إضافات")}
+              <Github size={16} strokeWidth={2} />
+              {t("GitHub Profile", "ملفي على GitHub")}
+            </a>
+            <button
+              className="btn-outline btn-ripple"
+              onClick={() => setActive("business")}
+              data-hover
+            >
+              <ArrowUpRight size={16} strokeWidth={2} />
+              {t("Work With Me", "اعمل معي")}
             </button>
-          ))}
-          <input
-            type="text"
-            className="search-box"
-            placeholder={t("Search projects…", "ابحث في المشاريع…")}
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
+          </div>
         </div>
 
-        {filtered.length === 0 ? (
-          <div style={{ textAlign: "center", padding: "60px 0", color: "var(--text3)", fontSize: "15px" }}>
-            {t("No projects found.", "لا توجد مشاريع مطابقة.")}
+        {/* ── Filter + toggle ── */}
+        <div className="projects-toolbar reveal">
+          <div className="filter-bar" style={{ flex: 1 }}>
+            {CATEGORIES.map(cat => (
+              <button
+                key={cat}
+                className={`filter-btn ${filter === cat ? "active" : ""}`}
+                onClick={() => setFilter(cat)}
+                data-hover
+              >
+                {cat === "All"
+                  ? t("All", "الكل")
+                  : cat === "Web"
+                    ? t("Web", "ويب")
+                    : t("Extensions", "إضافات")}
+                <span className="filter-count">{getCatCount(cat)}</span>
+              </button>
+            ))}
+            <input
+              type="text"
+              className="search-box"
+              placeholder={t("Search…", "بحث…")}
+              value={search}
+              onChange={e => setSearch(e.target.value)}
+            />
           </div>
-        ) : (
-          <div className="projects-grid">
-            {filtered.map((p) => (
+          <div className="view-toggle">
+            <button
+              className={`view-toggle-btn ${viewMode === "list" ? "active" : ""}`}
+              onClick={() => setViewMode("list")}
+              aria-label="List view"
+              data-hover
+            >
+              <List size={16} />
+            </button>
+            <button
+              className={`view-toggle-btn ${viewMode === "grid" ? "active" : ""}`}
+              onClick={() => setViewMode("grid")}
+              aria-label="Grid view"
+              data-hover
+            >
+              <LayoutGrid size={16} />
+            </button>
+          </div>
+        </div>
+
+        {/* ── List View ── */}
+        {viewMode === "list" && (
+          <div className="projects-list reveal">
+            <div className="projects-list-header">
+              <span>{t("CLIENT / PROJECT", "المشروع")}</span>
+              <span>{t("CATEGORY", "الفئة")}</span>
+              <span>{t("YEAR", "السنة")}</span>
+            </div>
+            {filtered.map((p, i) => (
               <div
                 key={p.id}
-                className={`project-card ${p.featured ? "featured" : ""}`}
+                className="projects-list-row reveal"
+                style={{ transitionDelay: `${i * 0.04}s` }}
+                onClick={() => setSelected(p)}
+                onMouseEnter={() => setHoverPreview(p)}
+                onMouseLeave={() => setHoverPreview(null)}
+                data-hover
+              >
+                <span className="list-row-name">
+                  {isAr && p.nameAr ? p.nameAr : p.name}
+                </span>
+                <span className="list-row-cat">{p.category}</span>
+                <span className="list-row-year">2024</span>
+                <ArrowUpRight size={16} className="list-row-arrow" />
+              </div>
+            ))}
+
+            {/* Hover preview image */}
+            {hoverPreview?.image && (
+              <div className="list-hover-preview">
+                <img src={hoverPreview.image} alt={hoverPreview.name} />
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* ── Grid View ── */}
+        {viewMode === "grid" && (
+          <div className="projects-grid-big">
+            {filtered.map((p, i) => (
+              <div
+                key={p.id}
+                className={`project-grid-card reveal reveal-delay-${(i % 4) + 1}`}
                 onClick={() => setSelected(p)}
                 data-hover
               >
-                {p.image && (
-                  <div className="project-thumb">
+                {/* Screenshot */}
+                <div className="project-grid-img">
+                  {p.image ? (
                     <img src={p.image} alt={p.name} loading="lazy" />
+                  ) : (
+                    <div className="project-grid-placeholder">
+                      <Code2 size={32} color="var(--text3)" />
+                    </div>
+                  )}
+                  <div className="project-grid-overlay">
+                    <div className="project-grid-actions">
+                      {p.live && (
+                        <a
+                          href={p.live}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={e => e.stopPropagation()}
+                          className="project-icon-btn"
+                          title="Live"
+                          data-hover
+                        >
+                          <ExternalLink size={16} />
+                        </a>
+                      )}
+                      <a
+                        href={p.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={e => e.stopPropagation()}
+                        className="project-icon-btn"
+                        title="GitHub"
+                        data-hover
+                      >
+                        <Github size={16} />
+                      </a>
+                    </div>
                   </div>
-                )}
-                <div style={{ fontSize: "11px", color: "var(--accent)", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.07em", marginBottom: 6 }}>
-                  {p.category}{p.featured ? " · ⭐" : ""}
                 </div>
-                <div className="project-title">{isAr && p.nameAr ? p.nameAr : p.name}</div>
-                <p className="project-desc">
-                  {(isAr && p.descriptionAr ? p.descriptionAr : p.description).slice(0, 110)}…
-                </p>
-                <div>
-                  {p.tags.map((tag) => (
-                    <span key={tag} className={`tag ${p.category === "Extension" ? "ext" : ""}`}>{tag}</span>
-                  ))}
-                </div>
-                <div style={{ marginTop: 14, fontSize: "12px", color: "var(--text3)", display: "flex", gap: 10, alignItems: "center" }}>
-                  {p.live
-                    ? <span style={{ color: "var(--accent)", fontWeight: 600, display: "flex", alignItems: "center", gap: 4 }}><Rocket size={12} /> {t("Live", "مباشر")}</span>
-                    : <span style={{ display: "flex", alignItems: "center", gap: 4 }}>🔧 {t("In Progress", "قيد التطوير")}</span>}
-                  <span style={{ display: "flex", alignItems: "center", gap: 4 }}><Github size={12} /> {t("GitHub", "جيت هاب")}</span>
+                {/* Bottom info */}
+                <div className="project-grid-info">
+                  <div className="project-grid-cat">{p.category}</div>
+                  <div className="project-grid-name">
+                    {isAr && p.nameAr ? p.nameAr : p.name}
+                  </div>
+                  <div className="project-grid-tags">
+                    {p.tags.slice(0, 3).map(tag => (
+                      <span key={tag} className="tag">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
             ))}
           </div>
         )}
 
+        {filtered.length === 0 && (
+          <div
+            style={{
+              textAlign: "center",
+              padding: "60px 0",
+              color: "var(--text3)",
+            }}
+          >
+            {t("No projects found.", "لا توجد مشاريع مطابقة.")}
+          </div>
+        )}
+
         <Footer setActive={setActive} />
       </section>
 
-      {selected && <ProjectModal project={selected} onClose={() => setSelected(null)} />}
+      {selected && (
+        <ProjectModal project={selected} onClose={() => setSelected(null)} />
+      )}
     </>
   );
 }
