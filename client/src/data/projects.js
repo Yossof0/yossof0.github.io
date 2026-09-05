@@ -92,16 +92,51 @@ export const projects = [
 ];
 
 export const techStack = [
-  { name: "JavaScript", nameAr: "جافاسكريبت", emoji: "💛", category: "Frontend" },
-  { name: "TypeScript", nameAr: "تايب سكريبت", emoji: "💙", category: "Frontend" },
-  { name: "React / Next.js", nameAr: "رياكت / نكست", emoji: "⚛️", category: "Frontend" },
-  { name: "HTML5 / CSS3", nameAr: "HTML5 / CSS3", emoji: "❤️", category: "Frontend" },
-  { name: "TailwindCSS", nameAr: "تيل ويند", emoji: "🎨", category: "Frontend" },
+  {
+    name: "JavaScript",
+    nameAr: "جافاسكريبت",
+    emoji: "💛",
+    category: "Frontend",
+  },
+  {
+    name: "TypeScript",
+    nameAr: "تايب سكريبت",
+    emoji: "💙",
+    category: "Frontend",
+  },
+  {
+    name: "React / Next.js",
+    nameAr: "رياكت / نكست",
+    emoji: "⚛️",
+    category: "Frontend",
+  },
+  {
+    name: "HTML5 / CSS3",
+    nameAr: "HTML5 / CSS3",
+    emoji: "❤️",
+    category: "Frontend",
+  },
+  {
+    name: "TailwindCSS",
+    nameAr: "تيل ويند",
+    emoji: "🎨",
+    category: "Frontend",
+  },
   { name: "Flutter", nameAr: "فلاتر", emoji: "📱", category: "Frontend" },
-  { name: "Node.js / Express", nameAr: "نود جي إس", emoji: "🔧", category: "Backend" },
+  {
+    name: "Node.js / Express",
+    nameAr: "نود جي إس",
+    emoji: "🔧",
+    category: "Backend",
+  },
   { name: "Python", nameAr: "بايثون", emoji: "🐍", category: "Backend" },
   { name: "PHP", nameAr: "PHP", emoji: "🔑", category: "Backend" },
-  { name: "JWT / OAuth", nameAr: "JWT / OAuth", emoji: "🔒", category: "Backend" },
+  {
+    name: "JWT / OAuth",
+    nameAr: "JWT / OAuth",
+    emoji: "🔒",
+    category: "Backend",
+  },
   { name: "SQL", nameAr: "SQL", emoji: "🧠", category: "Backend" },
   { name: "Docker", nameAr: "دوكر", emoji: "⚙️", category: "Tools" },
   { name: "Git", nameAr: "جيت", emoji: "📚", category: "Tools" },
@@ -115,21 +150,31 @@ export const socials = {
   twitter: "https://x.com/Overclock33",
   youtube: "https://youtube.com/@OverClock33",
   linkedin: "https://www.linkedin.com/in/yossof-abdelwahed-20b2b1408",
-  email: "yossef0bus@gmail.com",
+  email: "yossof0bus@gmail.com",
 };
 
 export const personalInfo = {
   name: "Yossof Abdelwahed",
   nameAr: "يوسف عبدالواحد",
-  phone: "+20 01554873048",
+  phone: "+20 1050684777",
   location: "Cairo, Egypt",
   locationAr: "القاهرة، مصر",
   officeHours: "Sunday – Thursday",
   officeHoursAr: "الأحد – الخميس",
   availability: "Available for freelance work",
   availabilityAr: "متاح للعمل الحر",
-  roles: ["Frontend Developer", "Full-Stack Developer", "UI/UX Enthusiast", "Open Source Builder"],
-  rolesAr: ["مطور واجهات أمامية", "مطور متكامل", "مهتم بتجربة المستخدم", "مطور مفتوح المصدر"],
+  roles: [
+    "Frontend Developer",
+    "Full-Stack Developer",
+    "UI/UX Enthusiast",
+    "Open Source Builder",
+  ],
+  rolesAr: [
+    "مطور واجهات أمامية",
+    "مطور متكامل",
+    "مهتم بتجربة المستخدم",
+    "مطور مفتوح المصدر",
+  ],
   bioBrief:
     "I build clean, fast, and thoughtful web experiences. Based in Cairo, Egypt — available worldwide.",
   bioBriefAr:

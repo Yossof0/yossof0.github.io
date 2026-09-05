@@ -35,7 +35,7 @@ export default function Navbar({ active, setActive }) {
 
   return (
     <>
-      {/* ── Desktop floating pill nav ── */}
+      {/* Desktop — top center pill */}
       <nav
         className="nav-pill nav-desktop"
         role="navigation"
@@ -54,37 +54,32 @@ export default function Navbar({ active, setActive }) {
             <Icon size={18} strokeWidth={2} />
           </button>
         ))}
-
         <div className="nav-divider" />
-
         <div className="nav-controls">
           <button
             className="nav-ctrl-btn"
             onClick={toggleTheme}
-            title={theme === "dark" ? "Light mode" : "Dark mode"}
             aria-label="Toggle theme"
             data-hover
           >
             {theme === "dark" ? (
-              <Sun size={16} strokeWidth={2} />
+              <Sun size={15} strokeWidth={2} />
             ) : (
-              <Moon size={16} strokeWidth={2} />
+              <Moon size={15} strokeWidth={2} />
             )}
           </button>
           <button
             className="nav-ctrl-btn"
             onClick={toggleLang}
-            title={lang === "en" ? "العربية" : "English"}
             aria-label="Toggle language"
             data-hover
-            style={{ fontSize: "11px", fontWeight: 800 }}
           >
             {lang === "en" ? "ع" : "EN"}
           </button>
         </div>
       </nav>
 
-      {/* ── Mobile hamburger button ── */}
+      {/* Mobile hamburger — top right */}
       <button
         className="nav-mobile-trigger"
         onClick={() => setMobileOpen(o => !o)}
@@ -98,7 +93,7 @@ export default function Navbar({ active, setActive }) {
         )}
       </button>
 
-      {/* ── Mobile slide-up menu ── */}
+      {/* Mobile slide-down menu */}
       <div
         className={`nav-mobile-menu ${mobileOpen ? "open" : ""}`}
         role="navigation"
@@ -111,17 +106,16 @@ export default function Navbar({ active, setActive }) {
               onClick={() => handleNav(id)}
               data-hover
             >
-              <Icon size={20} strokeWidth={2} />
+              <Icon size={18} strokeWidth={2} />
               <span>{lang === "en" ? labelEn : labelAr}</span>
             </button>
           ))}
-
           <div className="nav-mobile-controls">
             <button className="nav-ctrl-btn" onClick={toggleTheme} data-hover>
               {theme === "dark" ? (
-                <Sun size={18} strokeWidth={2} />
+                <Sun size={16} strokeWidth={2} />
               ) : (
-                <Moon size={18} strokeWidth={2} />
+                <Moon size={16} strokeWidth={2} />
               )}
             </button>
             <button
@@ -136,7 +130,6 @@ export default function Navbar({ active, setActive }) {
         </div>
       </div>
 
-      {/* ── Overlay behind mobile menu ── */}
       {mobileOpen && (
         <div
           className="nav-mobile-overlay"

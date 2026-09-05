@@ -13,6 +13,7 @@ import {
   Linkedin,
   Download,
 } from "lucide-react";
+import { useScrollReveal } from "../hooks/useScrollReveal";
 
 const SOCIAL_ICONS = [
   { href: socials.website, Icon: Globe, label: "Website" },
@@ -29,20 +30,13 @@ export default function HomeSection({ setActive }) {
   const role = useTypewriter(roles, 75, 1800);
   const featured = projects.filter(p => p.featured);
   const [selected, setSelected] = useState(null);
+  const ref = useScrollReveal();
 
   return (
     <>
-      <section className="section">
+      <section className="section" ref={ref}>
         <div className="hero">
           <img src="/images/hero-bg.jpg" alt="" className="hero-bg-photo" />
-
-          {/* Sunset profile photo — right side decoration */}
-          <img
-            src="/images/hero-profile.png"
-            alt=""
-            className="hero-profile-photo"
-            aria-hidden="true"
-          />
 
           <div className="hero-badge">
             <span className="dot" />
@@ -101,14 +95,14 @@ export default function HomeSection({ setActive }) {
         </div>
 
         <div className="home-projects">
-          <p className="home-projects-title">
+          <p className="home-projects-title reveal">
             {t("✦ Latest Projects", "✦ آخر المشاريع")}
           </p>
           <div className="home-projects-grid">
-            {featured.map(p => (
+            {featured.map((p, i) => (
               <div
                 key={p.id}
-                className="project-card featured"
+                className={`project-card featured reveal reveal-delay-${i + 1}`}
                 onClick={() => setSelected(p)}
                 data-hover
               >
@@ -149,7 +143,10 @@ export default function HomeSection({ setActive }) {
               </div>
             ))}
           </div>
-          <div style={{ textAlign: "center", marginTop: 24 }}>
+          <div
+            style={{ textAlign: "center", marginTop: 24 }}
+            className="reveal"
+          >
             <button
               className="btn-outline btn-ripple"
               onClick={() => setActive("projects")}
