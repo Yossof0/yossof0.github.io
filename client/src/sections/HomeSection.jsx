@@ -12,6 +12,8 @@ import {
   Youtube,
   Linkedin,
   Download,
+  ArrowRight,
+  ExternalLink,
 } from "lucide-react";
 import { useScrollReveal } from "../hooks/useScrollReveal";
 
@@ -34,7 +36,8 @@ export default function HomeSection({ setActive }) {
 
   return (
     <>
-      <section className="section" ref={ref}>
+      <section className="section section--home" ref={ref}>
+        {/* ── Hero ── */}
         <div className="hero">
           <img src="/images/hero-bg.jpg" alt="" className="hero-bg-photo" />
 
@@ -44,8 +47,7 @@ export default function HomeSection({ setActive }) {
           </div>
 
           <h1 className="hero-name">
-            {t("Hi, I'm ", "مرحباً، أنا ")}
-            <span>{isAr ? personalInfo.nameAr : "Yossof"}</span>
+            {t("Hi, I'm Yossof", "مرحباً، أنا يوسف")}
           </h1>
 
           <div className="hero-role">
@@ -94,71 +96,93 @@ export default function HomeSection({ setActive }) {
           </div>
         </div>
 
-        <div className="home-projects">
-          <p className="home-projects-title reveal">
-            {t("✦ Latest Projects", "✦ آخر المشاريع")}
-          </p>
+        {/* ── Latest Projects ── */}
+        <div className="home-projects-wrap">
+          <div className="home-projects-header reveal">
+            <h2 className="home-projects-heading">
+              {t("✦ Latest Projects", "✦ آخر المشاريع")}
+            </h2>
+            <button
+              className="home-view-all"
+              onClick={() => setActive("projects")}
+              data-hover
+            >
+              {t("View All", "عرض الكل")} <ArrowRight size={15} />
+            </button>
+          </div>
+
           <div className="home-projects-grid">
             {featured.map((p, i) => (
               <div
                 key={p.id}
-                className={`project-card featured reveal reveal-delay-${i + 1}`}
+                className={`home-project-card reveal reveal-delay-${i + 1}`}
                 onClick={() => setSelected(p)}
                 data-hover
               >
-                {p.image && (
-                  <div className="project-thumb">
+                {/* Screenshot */}
+                <div className="home-project-img">
+                  {p.image ? (
                     <img src={p.image} alt={p.name} loading="lazy" />
+                  ) : (
+                    <div className="home-project-placeholder" />
+                  )}
+                </div>
+
+                {/* Info */}
+                <div className="home-project-body">
+                  <div className="home-project-name">
+                    {isAr && p.nameAr ? p.nameAr : p.name}
                   </div>
-                )}
-                <div
-                  style={{
-                    fontSize: "11px",
-                    color: "var(--accent)",
-                    fontWeight: 700,
-                    textTransform: "uppercase",
-                    letterSpacing: "0.07em",
-                    marginBottom: 6,
-                  }}
-                >
-                  {p.category}
-                </div>
-                <div className="project-title">
-                  {isAr && p.nameAr ? p.nameAr : p.name}
-                </div>
-                <p className="project-desc">
-                  {(isAr && p.descriptionAr
-                    ? p.descriptionAr
-                    : p.description
-                  ).slice(0, 100)}
-                  …
-                </p>
-                <div>
-                  {p.tags.slice(0, 3).map(tag => (
-                    <span key={tag} className="tag">
-                      {tag}
-                    </span>
-                  ))}
+                  <p className="home-project-desc">
+                    {(isAr && p.descriptionAr
+                      ? p.descriptionAr
+                      : p.description
+                    ).slice(0, 90)}
+                    …
+                  </p>
+                  <div className="home-project-tags">
+                    {p.tags.slice(0, 3).map(tag => (
+                      <span key={tag} className="tag">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  {/* Icon actions */}
+                  <div className="home-project-actions">
+                    <a
+                      href={p.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={e => e.stopPropagation()}
+                      className="home-project-icon-btn"
+                      title="GitHub"
+                      data-hover
+                    >
+                      <Github size={16} strokeWidth={2} />
+                    </a>
+                    {p.live && (
+                      <a
+                        href={p.live}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={e => e.stopPropagation()}
+                        className="home-project-icon-btn"
+                        title="Live"
+                        data-hover
+                      >
+                        <ExternalLink size={16} strokeWidth={2} />
+                      </a>
+                    )}
+                  </div>
                 </div>
               </div>
             ))}
           </div>
-          <div
-            style={{ textAlign: "center", marginTop: 24 }}
-            className="reveal"
-          >
-            <button
-              className="btn-outline btn-ripple"
-              onClick={() => setActive("projects")}
-              data-hover
-              style={{ fontSize: "14px", padding: "10px 24px" }}
-            >
-              {t("View All Projects →", "جميع المشاريع ←")}
-            </button>
-          </div>
         </div>
 
-        <Footer setActive={setActive} />
+        <div style={{ maxWidth: 960, margin: "0 auto", padding: "0 24px" }}>
+          <Footer setActive={setActive} />
+        </div>
       </section>
 
       {selected && (
