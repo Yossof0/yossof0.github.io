@@ -3,7 +3,7 @@ import { useTypewriter } from "../hooks/useTypewriter";
 import { personalInfo, projects, socials } from "../data/projects";
 import Footer from "../components/Footer";
 import ProjectModal from "../components/ProjectModal";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import {
   Globe,
   Github,
@@ -15,7 +15,6 @@ import {
   ArrowRight,
   ExternalLink,
 } from "lucide-react";
-import { useScrollReveal } from "../hooks/useScrollReveal";
 
 const SOCIAL_ICONS = [
   { href: socials.website, Icon: Globe, label: "Website" },
@@ -32,71 +31,87 @@ export default function HomeSection({ setActive }) {
   const role = useTypewriter(roles, 75, 1800);
   const featured = projects.filter(p => p.featured);
   const [selected, setSelected] = useState(null);
-  const ref = useScrollReveal();
+  const belowRef = useRef(null);
+
+  // Scroll reveal for below-hero content only
+  useEffect(() => {
+    const container = belowRef.current;
+    if (!container) return;
+    const els = container.querySelectorAll(".reveal");
+    const obs = new IntersectionObserver(
+      entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add("revealed");
+            obs.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.08 }
+    );
+    els.forEach(el => obs.observe(el));
+    return () => obs.disconnect();
+  }, []);
 
   return (
     <>
-      <section className="section section--home" ref={ref}>
-        {/* ── Hero ── */}
-        <div className="hero">
-          <img src="/images/hero-bg.jpg" alt="" className="hero-bg-photo" />
-
-          <div className="hero-badge">
-            <span className="dot" />
-            {t(personalInfo.availability, personalInfo.availabilityAr)}
-          </div>
-
-          <h1 className="hero-name">
-            {t("Hi, I'm Yossof", "مرحباً، أنا يوسف")}
-          </h1>
-
-          <div className="hero-role">
-            <span>{role}</span>
-            <span className="cursor-blink">|</span>
-          </div>
-
-          <p className="hero-bio">
-            {t(personalInfo.bioBrief, personalInfo.bioBriefAr)}
-          </p>
-
-          <div className="hero-actions">
-            <button
-              className="btn-primary btn-ripple"
-              onClick={() => setActive("contact")}
-              data-hover
-            >
-              {t("Let's Talk →", "تحدث معي ←")}
-            </button>
-            <a
-              href="/resume.pdf"
-              download
-              className="btn-outline btn-ripple"
-              data-hover
-            >
-              <Download size={15} strokeWidth={2} />
-              {t("Resume", "السيرة الذاتية")}
-            </a>
-          </div>
-
-          <div className="hero-socials">
-            {SOCIAL_ICONS.map(({ href, Icon, label }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="social-icon"
-                title={label}
-                aria-label={label}
-                data-hover
-              >
-                <Icon size={17} strokeWidth={1.8} />
-              </a>
-            ))}
-          </div>
+      {/* Hero — full viewport, no section wrapper */}
+      <div className="hero">
+        <div className="hero-badge">
+          <span className="dot" />
+          {t(personalInfo.availability, personalInfo.availabilityAr)}
         </div>
 
-        {/* ── Latest Projects ── */}
+        <h1 className="hero-name">{t("Hi, I'm Yossof", "مرحباً، أنا يوسف")}</h1>
+
+        <div className="hero-role">
+          <span>{role}</span>
+          <span className="cursor-blink">|</span>
+        </div>
+
+        <p className="hero-bio">
+          {t(personalInfo.bioBrief, personalInfo.bioBriefAr)}
+        </p>
+
+        <div className="hero-actions">
+          <button
+            className="btn-primary btn-ripple"
+            onClick={() => setActive("contact")}
+            data-hover
+          >
+            {t("Let's Talk →", "تحدث معي ←")}
+          </button>
+          <a
+            href="/resume.pdf"
+            download
+            className="btn-outline btn-ripple"
+            data-hover
+          >
+            <Download size={15} strokeWidth={2} />
+            {t("Resume", "السيرة الذاتية")}
+          </a>
+        </div>
+
+        <div className="hero-socials">
+          {SOCIAL_ICONS.map(({ href, Icon, label }) => (
+            <a
+              key={label}
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="social-icon"
+              title={label}
+              aria-label={label}
+              data-hover
+            >
+              <Icon size={17} strokeWidth={1.8} />
+            </a>
+          ))}
+        </div>
+      </div>
+
+      {/* Below hero — projects + footer */}
+      <div ref={belowRef}>
         <div className="home-projects-wrap">
           <div className="home-projects-header reveal">
             <h2 className="home-projects-heading">
@@ -119,7 +134,6 @@ export default function HomeSection({ setActive }) {
                 onClick={() => setSelected(p)}
                 data-hover
               >
-                {/* Screenshot */}
                 <div className="home-project-img">
                   {p.image ? (
                     <img src={p.image} alt={p.name} loading="lazy" />
@@ -127,8 +141,6 @@ export default function HomeSection({ setActive }) {
                     <div className="home-project-placeholder" />
                   )}
                 </div>
-
-                {/* Info */}
                 <div className="home-project-body">
                   <div className="home-project-name">
                     {isAr && p.nameAr ? p.nameAr : p.name}
@@ -147,7 +159,6 @@ export default function HomeSection({ setActive }) {
                       </span>
                     ))}
                   </div>
-                  {/* Icon actions */}
                   <div className="home-project-actions">
                     <a
                       href={p.github}
@@ -183,7 +194,7 @@ export default function HomeSection({ setActive }) {
         <div style={{ maxWidth: 960, margin: "0 auto", padding: "0 24px" }}>
           <Footer setActive={setActive} />
         </div>
-      </section>
+      </div>
 
       {selected && (
         <ProjectModal project={selected} onClose={() => setSelected(null)} />

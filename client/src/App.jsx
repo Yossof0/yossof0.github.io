@@ -4,6 +4,7 @@ import { LangProvider } from "./contexts/LangContext";
 import Cursor from "./components/Cursor";
 import Navbar from "./components/Navbar";
 import ScrollToTop from "./components/ScrollToTop";
+import ScrollProgress from "./components/ScrollProgress";
 import HomeSection from "./sections/HomeSection";
 import AboutSection from "./sections/AboutSection";
 import ProjectsSection from "./sections/ProjectsSection";
@@ -112,6 +113,7 @@ function Portfolio() {
   return (
     <>
       <Cursor />
+      <ScrollProgress />
       <div
         key={animKey}
         className={`page-transition page-transition--${direction}`}
