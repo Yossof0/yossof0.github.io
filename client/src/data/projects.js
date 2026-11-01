@@ -32,7 +32,7 @@ export const projects = [
   {
     id: 3,
     name: "STEM El Fayoum Website",
-    image: "/projects/stem-elfayoum.svg",
+    image: "/projects/stemfayoum.png",
     nameAr: "موقع STEM El Fayoum",
     description:
       "A modern school website for STEM El Fayoum School, featuring a premium landing page, bilingual content, clear section navigation, and a contact experience tailored for parents and students.",
