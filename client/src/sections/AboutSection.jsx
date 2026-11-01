@@ -205,7 +205,7 @@ export default function AboutSection({ setActive }) {
         </div>
         <div className="about-photo-col">
           <div className="about-photo-wrap">
-            <img src="/gallery/photo-1.jpg" alt="Yossof Abdelwahed" />
+            <img src="/gallery/photo-3.png" alt="Yossof Abdelwahed" />
           </div>
           <div className="about-photo-accent" />
         </div>

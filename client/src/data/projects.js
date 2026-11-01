@@ -57,7 +57,7 @@ export const projects = [
     category: "Web",
     github: "https://github.com/Yossof0/WordCombination",
     live: "https://yossof0.github.io/WordCombination",
-    featured: true,
+    featured: false,
   },
   {
     id: 5,

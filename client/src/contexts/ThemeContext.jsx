@@ -3,24 +3,27 @@ import { createContext, useContext, useEffect, useState } from "react";
 const ThemeContext = createContext();
 
 export function ThemeProvider({ children }) {
-  const [theme, setTheme] = useState(() => {
-    if (typeof window === "undefined") return "dark";
-    return window.localStorage.getItem("portfolio-theme") || "dark";
-  });
+  const [theme, setTheme] = useState("dark");
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    if (typeof document === "undefined") return;
-    document.documentElement.setAttribute("data-theme", theme);
-
-    if (typeof window !== "undefined") {
-      window.localStorage.setItem("portfolio-theme", theme);
+    const savedTheme = window.localStorage.getItem("portfolio-theme");
+    if (savedTheme === "dark" || savedTheme === "light") {
+      setTheme(savedTheme);
     }
-  }, [theme]);
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted || typeof document === "undefined") return;
+    document.documentElement.setAttribute("data-theme", theme);
+    window.localStorage.setItem("portfolio-theme", theme);
+  }, [theme, mounted]);
 
   const toggleTheme = () => setTheme((t) => (t === "dark" ? "light" : "dark"));
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider value={{ theme: mounted ? theme : "dark", toggleTheme }}>
       {children}
     </ThemeContext.Provider>
   );

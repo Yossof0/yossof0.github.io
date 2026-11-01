@@ -62,7 +62,7 @@ export default function HomeSection({ setActive }) {
           {t(personalInfo.availability, personalInfo.availabilityAr)}
         </div>
 
-        <h1 className="hero-name">{t("Hi, I'm Yossof", "مرحباً، أنا يوسف")}</h1>
+        <h1 className="hero-name">{t("Hi, I'm Youssef", "مرحباً، أنا يوسف")}</h1>
 
         <div className="hero-role">
           <span>{role}</span>
