@@ -190,17 +190,19 @@ export default function ProjectsSection({ setActive }) {
                           <ExternalLink size={16} />
                         </a>
                       )}
-                      <a
-                        href={p.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={e => e.stopPropagation()}
-                        className="project-icon-btn"
-                        title="GitHub"
-                        data-hover
-                      >
-                        <Github size={16} />
-                      </a>
+                      {p.github && (
+                        <a
+                          href={p.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={e => e.stopPropagation()}
+                          className="project-icon-btn"
+                          title="GitHub"
+                          data-hover
+                        >
+                          <Github size={16} />
+                        </a>
+                      )}
                     </div>
                   </div>
                 </div>

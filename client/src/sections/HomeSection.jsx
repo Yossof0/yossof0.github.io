@@ -160,17 +160,19 @@ export default function HomeSection({ setActive }) {
                     ))}
                   </div>
                   <div className="home-project-actions">
-                    <a
-                      href={p.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={e => e.stopPropagation()}
-                      className="home-project-icon-btn"
-                      title="GitHub"
-                      data-hover
-                    >
-                      <Github size={16} strokeWidth={2} />
-                    </a>
+                    {p.github && (
+                      <a
+                        href={p.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={e => e.stopPropagation()}
+                        className="home-project-icon-btn"
+                        title="GitHub"
+                        data-hover
+                      >
+                        <Github size={16} strokeWidth={2} />
+                      </a>
+                    )}
                     {p.live && (
                       <a
                         href={p.live}

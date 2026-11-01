@@ -31,6 +31,21 @@ export const projects = [
   },
   {
     id: 3,
+    name: "STEM El Fayoum Website",
+    image: "/projects/stem-elfayoum.svg",
+    nameAr: "موقع STEM El Fayoum",
+    description:
+      "A modern school website for STEM El Fayoum School, featuring a premium landing page, bilingual content, clear section navigation, and a contact experience tailored for parents and students.",
+    descriptionAr:
+      "موقع مدرسة حديث يعرض STEM El Fayoum School بثوب احترافي، محتوى ثنائي اللغة، تنقل واضح بين الأقسام، وتجربة تواصل مخصصة للطلاب وأولياء الأمور.",
+    tags: ["Next.js", "React", "UI/UX", "Landing Page"],
+    category: "Web",
+    github: null,
+    live: "https://stemelfayoum.vercel.app",
+    featured: true,
+  },
+  {
+    id: 4,
     name: "Word Combination Calculator",
     image: "/projects/word-combination.png",
     nameAr: "حاسبة تركيب الكلمات",
@@ -45,7 +60,7 @@ export const projects = [
     featured: true,
   },
   {
-    id: 4,
+    id: 5,
     name: "Shelfify",
     image: "/projects/shelfify.png",
     nameAr: "شيلفيفاي",
@@ -60,7 +75,7 @@ export const projects = [
     featured: false,
   },
   {
-    id: 5,
+    id: 6,
     name: "Custom Grab Cursor Extension",
     image: "/projects/custom-grab-cursor.png",
     nameAr: "إضافة المؤشر المخصص",
@@ -75,7 +90,7 @@ export const projects = [
     featured: false,
   },
   {
-    id: 6,
+    id: 7,
     name: "Rubik's Cube Teaching Website",
     image: "/projects/rubiks-cube.png",
     nameAr: "موقع تعليم مكعب روبيك",

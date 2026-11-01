@@ -49,12 +49,13 @@ const SECTIONS = {
 const VALID_ROUTES = Object.keys(SECTIONS);
 
 function getRouteFromHash() {
+  if (typeof window === "undefined") return "home";
   const hash = window.location.hash.replace("#/", "").toLowerCase();
   return VALID_ROUTES.includes(hash) ? hash : "home";
 }
 
 function Portfolio() {
-  const [active, setActive] = useState(getRouteFromHash);
+  const [active, setActive] = useState("home");
   const [animKey, setAnimKey] = useState(0);
   const [direction, setDirection] = useState("forward");
 
@@ -69,44 +70,53 @@ function Portfolio() {
       setAnimKey(k => k + 1);
       setActive(id);
 
-      // Update URL hash
-      window.history.pushState(null, "", id === "home" ? "#/" : `#/${id}`);
+      if (typeof window !== "undefined") {
+        window.history.pushState(null, "", id === "home" ? "#/" : `#/${id}`);
 
-      // Update page title
-      const lang = document.documentElement.getAttribute("lang") || "en";
-      const section = SECTIONS[id];
-      document.title = lang === "ar" ? section.titleAr : section.title;
+        const lang = document.documentElement.getAttribute("lang") || "en";
+        const section = SECTIONS[id];
+        document.title = lang === "ar" ? section.titleAr : section.title;
 
-      window.scrollTo({ top: 0, behavior: "instant" });
+        window.scrollTo({ top: 0, behavior: "instant" });
+      }
     },
     [active]
   );
 
-  // Handle browser back/forward
+  // Sync the route from the browser hash after hydration.
   useEffect(() => {
-    const onPopState = () => {
-      const route = getRouteFromHash();
-      if (route !== active) {
-        setAnimKey(k => k + 1);
-        setActive(route);
-        const lang = document.documentElement.getAttribute("lang") || "en";
-        document.title =
-          lang === "ar" ? SECTIONS[route].titleAr : SECTIONS[route].title;
-      }
-    };
-    window.addEventListener("popstate", onPopState);
-    return () => window.removeEventListener("popstate", onPopState);
-  }, [active]);
+    if (typeof window === "undefined") return;
 
-  // Set initial hash if none
-  useEffect(() => {
+    const route = getRouteFromHash();
+    if (route !== active) {
+      setAnimKey(k => k + 1);
+      setActive(route);
+    }
+
     if (!window.location.hash) {
       window.history.replaceState(null, "", "#/");
     }
+
     const lang = document.documentElement.getAttribute("lang") || "en";
     document.title =
-      lang === "ar" ? SECTIONS[active].titleAr : SECTIONS[active].title;
-  }, []);
+      lang === "ar" ? SECTIONS[route].titleAr : SECTIONS[route].title;
+
+    const onPopState = () => {
+      const nextRoute = getRouteFromHash();
+      if (nextRoute !== active) {
+        setAnimKey(k => k + 1);
+        setActive(nextRoute);
+      }
+      const titleLang = document.documentElement.getAttribute("lang") || "en";
+      document.title =
+        titleLang === "ar"
+          ? SECTIONS[nextRoute].titleAr
+          : SECTIONS[nextRoute].title;
+    };
+
+    window.addEventListener("popstate", onPopState);
+    return () => window.removeEventListener("popstate", onPopState);
+  }, [active]);
 
   const { Component } = SECTIONS[active] || SECTIONS.home;
 

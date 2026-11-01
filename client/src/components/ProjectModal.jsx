@@ -227,21 +227,23 @@ export default function ProjectModal({ project, onClose }) {
                 🔧 {t("Not live yet", "غير منشور")}
               </span>
             )}
-            <a
-              href={project.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-outline"
-              style={{
-                fontSize: 14,
-                padding: "10px 22px",
-                textDecoration: "none",
-              }}
-              data-hover
-            >
-              <Github size={15} strokeWidth={2} />
-              {t("GitHub", "جيت هاب")}
-            </a>
+            {project.github && (
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-outline"
+                style={{
+                  fontSize: 14,
+                  padding: "10px 22px",
+                  textDecoration: "none",
+                }}
+                data-hover
+              >
+                <Github size={15} strokeWidth={2} />
+                {t("GitHub", "جيت هاب")}
+              </a>
+            )}
           </div>
         </div>
       </div>

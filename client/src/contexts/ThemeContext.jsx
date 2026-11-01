@@ -4,12 +4,17 @@ const ThemeContext = createContext();
 
 export function ThemeProvider({ children }) {
   const [theme, setTheme] = useState(() => {
-    return localStorage.getItem("portfolio-theme") || "dark";
+    if (typeof window === "undefined") return "dark";
+    return window.localStorage.getItem("portfolio-theme") || "dark";
   });
 
   useEffect(() => {
+    if (typeof document === "undefined") return;
     document.documentElement.setAttribute("data-theme", theme);
-    localStorage.setItem("portfolio-theme", theme);
+
+    if (typeof window !== "undefined") {
+      window.localStorage.setItem("portfolio-theme", theme);
+    }
   }, [theme]);
 
   const toggleTheme = () => setTheme((t) => (t === "dark" ? "light" : "dark"));

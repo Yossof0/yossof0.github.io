@@ -4,13 +4,18 @@ const LangContext = createContext();
 
 export function LangProvider({ children }) {
   const [lang, setLang] = useState(() => {
-    return localStorage.getItem("portfolio-lang") || "en";
+    if (typeof window === "undefined") return "en";
+    return window.localStorage.getItem("portfolio-lang") || "en";
   });
 
   useEffect(() => {
+    if (typeof document === "undefined") return;
     document.documentElement.setAttribute("dir", lang === "ar" ? "rtl" : "ltr");
     document.documentElement.setAttribute("lang", lang);
-    localStorage.setItem("portfolio-lang", lang);
+
+    if (typeof window !== "undefined") {
+      window.localStorage.setItem("portfolio-lang", lang);
+    }
   }, [lang]);
 
   const toggleLang = () => setLang((l) => (l === "en" ? "ar" : "en"));
