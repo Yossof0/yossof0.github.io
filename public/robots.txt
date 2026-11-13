@@ -18,4 +18,4 @@ User-agent: Applebot-Extended
 Allow: /
 
 # Link to your sitemap
-Sitemap: https://yourdomain.com/sitemap.xml
+Sitemap: https://yossof0.vercel.app/sitemap.xml
