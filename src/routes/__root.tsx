@@ -79,13 +79,30 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         meta: [
             { charSet: "utf-8" },
             { name: "viewport", content: "width=device-width, initial-scale=1.0, maximum-scale=1" },
-            { title: "Youssef Abdelwahed — Web Developer" },
+            { title: "Youssef Abdelwahed (Yossof Abdelwahed) — Web Developer" },
             {
                 name: "description",
                 content:
-                    "Frontend & Full-Stack Web Developer based in Cairo, Egypt. Available for freelance work worldwide.",
+                    "Frontend & Full-Stack Web Developer based in Cairo, Egypt. Creator of the STEM El Fayoum School website and modern bilingual web apps. Skilled in React, TypeScript, Tailwind CSS, and more. Passionate about building high-quality web experiences. Available for freelance projects and collaborations.",
             },
-            // ... your other meta tags ...
+            { name: "author", content: "Youssef Abdelwahed" },
+            { name: "robots", content: "index, follow" },
+            { property: "og:type", content: "website" },
+            { property: "og:url", content: "https://yossof0.vercel.app" },
+            { property: "og:site_name", content: "Youssef Abdelwahed Portfolio" },
+            { property: "og:title", content: "Youssef Abdelwahed (Yossof Abdelwahed) — Web Developer" },
+            {
+                property: "og:description",
+                content:
+                    "Frontend & Full-Stack Web Developer based in Cairo, Egypt. Creator of the STEM El Fayoum School website and modern bilingual web apps.",
+            },
+            { name: "twitter:card", content: "summary_large_image" },
+            { name: "twitter:title", content: "Youssef Abdelwahed (Yossof Abdelwahed) — Web Developer" },
+            {
+                name: "twitter:description",
+                content:
+                    "Frontend & Full-Stack Web Developer based in Cairo, Egypt. Creator of the STEM El Fayoum School website and modern bilingual web apps.",
+            },
         ],
         scripts: [
             {
@@ -94,10 +111,26 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
                     "@context": "https://schema.org",
                     "@graph": [
                         {
+                            "@type": "WebSite",
+                            "@id": "https://yossof0.vercel.app#website",
+                            name: "Youssef Abdelwahed Portfolio",
+                            alternateName: "Yossof Abdelwahed Portfolio",
+                            url: "https://yossof0.vercel.app",
+                            publisher: {
+                                "@id": "https://yossof0.vercel.app#person",
+                            },
+                        },
+                        {
                             "@type": "Person",
-                            "@id": "https://yossof0.vercel.app/#person",
+                            "@id": "https://yossof0.vercel.app#person",
                             name: "Youssef Abdelwahed",
-                            alternateName: ["Yossof Abdelwahed", "يوسف عبدالواحد"],
+                            alternateName: [
+                                "Yossof Abdelwahed",
+                                "Youssef Abdelwahed Mohamed",
+                                "Yossof0",
+                                "يوسف عبد الواحد",
+                                "يوسف عبدالواحد",
+                            ],
                             jobTitle: "Full-Stack Web Developer",
                             url: "https://yossof0.vercel.app",
                             address: {
@@ -105,10 +138,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
                                 addressLocality: "Cairo",
                                 addressCountry: "EG",
                             },
-                            sameAs: ["https://github.com/yossof0", "https://wa.me/201050684777"],
+                            sameAs: ["https://github.com/yossof0", "https://github.io", "https://wa.me/201050684777"],
                             knowsAbout: [
                                 "React",
                                 "TypeScript",
+                                "TanStack Router",
+                                "Next.js",
                                 "Tailwind CSS",
                                 "Full-Stack Web Development",
                                 "UI/UX Design",
@@ -117,8 +152,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
                         },
                         {
                             "@type": "ProfessionalService",
+                            "@id": "https://yossof0.vercel.app#service",
                             name: "Youssef Abdelwahed — Web Development Services",
                             url: "https://yossof0.vercel.app",
+                            provider: {
+                                "@id": "https://yossof0.vercel.app#person",
+                            },
                             priceRange: "$$",
                             areaServed: "Worldwide",
                             serviceType: [
@@ -126,6 +165,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
                                 "High-Converting Landing Pages",
                                 "Portfolio & Business Websites",
                             ],
+                        },
+                        {
+                            "@type": "CreativeWork",
+                            name: "STEM El Fayoum School Official Website",
+                            url: "https://stemelfayoum.vercel.app",
+                            creator: {
+                                "@id": "https://yossof0.vercel.app#person",
+                            },
+                            author: {
+                                "@id": "https://yossof0.vercel.app#person",
+                            },
                         },
                     ],
                 }),
