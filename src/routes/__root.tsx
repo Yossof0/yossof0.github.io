@@ -79,15 +79,57 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         meta: [
             { charSet: "utf-8" },
             { name: "viewport", content: "width=device-width, initial-scale=1.0, maximum-scale=1" },
-            { title: "Yossof Abdelwahed — Web Developer" },
+            { title: "Youssef Abdelwahed — Web Developer" },
             {
                 name: "description",
                 content:
                     "Frontend & Full-Stack Web Developer based in Cairo, Egypt. Available for freelance work worldwide.",
             },
-            { name: "author", content: "Yossof Abdelwahed" },
-            { property: "og:type", content: "website" },
-            { name: "twitter:card", content: "summary_large_image" },
+            // ... your other meta tags ...
+        ],
+        scripts: [
+            {
+                type: "application/ld+json",
+                children: JSON.stringify({
+                    "@context": "https://schema.org",
+                    "@graph": [
+                        {
+                            "@type": "Person",
+                            "@id": "https://yossof0.vercel.app/#person",
+                            name: "Youssef Abdelwahed",
+                            alternateName: ["Yossof Abdelwahed", "يوسف عبدالواحد"],
+                            jobTitle: "Full-Stack Web Developer",
+                            url: "https://yossof0.vercel.app",
+                            address: {
+                                "@type": "PostalAddress",
+                                addressLocality: "Cairo",
+                                addressCountry: "EG",
+                            },
+                            sameAs: ["https://github.com/yossof0", "https://wa.me/201050684777"],
+                            knowsAbout: [
+                                "React",
+                                "TypeScript",
+                                "Tailwind CSS",
+                                "Full-Stack Web Development",
+                                "UI/UX Design",
+                                "Web Performance Optimization",
+                            ],
+                        },
+                        {
+                            "@type": "ProfessionalService",
+                            name: "Youssef Abdelwahed — Web Development Services",
+                            url: "https://yossof0.vercel.app",
+                            priceRange: "$$",
+                            areaServed: "Worldwide",
+                            serviceType: [
+                                "Custom Web Applications",
+                                "High-Converting Landing Pages",
+                                "Portfolio & Business Websites",
+                            ],
+                        },
+                    ],
+                }),
+            },
         ],
         links: [
             { rel: "preconnect", href: "https://fonts.googleapis.com" },
