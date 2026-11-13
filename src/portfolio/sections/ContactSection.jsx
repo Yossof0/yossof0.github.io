@@ -1,31 +1,35 @@
-import { useRef, useState, useMemo } from "react";
 import emailjs from "@emailjs/browser";
-import ReCAPTCHAModule from "react-google-recaptcha";
-
-// CommonJS package: on the server the default export arrives wrapped in an object.
-const ReCAPTCHA = ReCAPTCHAModule.default ?? ReCAPTCHAModule;
-import { personalInfo, socials } from "../data/projects";
-import { useLang } from "../contexts/LangContext";
-import Footer from "../components/Footer";
 import {
+  Check,
+  Clock,
+  Copy,
+  Hammer,
   Mail,
   MapPin,
   Phone,
-  Clock,
   Send,
-  Hammer,
-  Copy,
-  Check,
-  ChevronDown,
-  ChevronUp,
-  X,
+  X
 } from "lucide-react";
+import { useMemo, useRef, useState } from "react";
+import ReCAPTCHAModule from "react-google-recaptcha";
+import Footer from "../components/Footer";
+import { useLang } from "../contexts/LangContext";
+import { personalInfo, socials } from "../data/projects";
 
-const RECAPTCHA_SITE_KEY = "6LdhXiwtAAAAAHTzW7W9CR8oWT3GSdCbPNCwJQLn";
+// CommonJS package: on the server the default export arrives wrapped in an object.
+const ReCAPTCHA = ReCAPTCHAModule.default ?? ReCAPTCHAModule;
+const RECAPTCHA_SITE_KEY =
+  import.meta.env.VITE_RECAPTCHA_SITE_KEY ||
+  "6LdhXiwtAAAAAHTzW7W9CR8oWT3GSdCbPNCwJQLn";
 
-const EMAILJS_SERVICE_ID = "service_0xioeyk";
-const EMAILJS_TEMPLATE_ID = "template_pafvk1f";
-const EMAILJS_PUBLIC_KEY = "Ezwb-ggi5WVMwD3dK";
+const EMAILJS_SERVICE_ID =
+  import.meta.env.VITE_EMAILJS_SERVICE_ID || "service_0xioeyk";
+
+const EMAILJS_TEMPLATE_ID =
+  import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "template_pafvk1f";
+
+const EMAILJS_PUBLIC_KEY =
+  import.meta.env.VITE_EMAILJS_PUBLIC_KEY || "Ezwb-ggi5WVMwD3dK";
 
 const USD_RATE = 50; // 1 USD = 50 EGP
 
