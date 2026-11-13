@@ -1,0 +1,33 @@
+import { useEffect, useState } from "react";
+
+export function useTypewriter(words, speed = 80, pause = 1800) {
+  const [wordIdx, setWordIdx] = useState(0);
+  const [charIdx, setCharIdx] = useState(0);
+  const [deleting, setDeleting] = useState(false);
+
+  // Restart when the word list changes (e.g. switching language).
+  useEffect(() => {
+    setWordIdx(0);
+    setCharIdx(0);
+    setDeleting(false);
+  }, [words]);
+
+  const current = words[wordIdx % words.length] ?? "";
+
+  useEffect(() => {
+    let timeout;
+    if (!deleting && charIdx < current.length) {
+      timeout = setTimeout(() => setCharIdx((c) => c + 1), speed);
+    } else if (!deleting) {
+      timeout = setTimeout(() => setDeleting(true), pause);
+    } else if (charIdx > 0) {
+      timeout = setTimeout(() => setCharIdx((c) => c - 1), speed / 2);
+    } else {
+      setDeleting(false);
+      setWordIdx((i) => (i + 1) % words.length);
+    }
+    return () => clearTimeout(timeout);
+  }, [charIdx, deleting, current, words.length, speed, pause]);
+
+  return current.slice(0, charIdx);
+}

@@ -1,0 +1,63 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Production build outputs
+dist/
+dist-ssr/
+.output/
+.vinxi/
+.nitro/
+
+# TanStack Router / Start generated cache
+.tanstack/
+routeTree.gen.ts.tmp
+
+# Environment variables & secrets (NEVER commit these)
+.env
+.env.*
+!.env.example
+.dev.vars
+*.local
+
+# Wrangler / Cloudflare
+.wrangler/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+bun.logb
+
+# Runtime data & temp files
+.cache/
+tmp/
+temp/
+
+# Testing & coverage
+coverage/
+.nyc_output/
+playwright-report/
+test-results/
+
+# OS metadata
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+ehthumbs.db
+
+# IDE & Editor files
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json

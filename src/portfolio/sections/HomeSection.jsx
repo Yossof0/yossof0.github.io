@@ -1,0 +1,224 @@
+import { ASSETS } from "../assets";
+import { useLang } from "../contexts/LangContext";
+import { useTypewriter } from "../hooks/useTypewriter";
+import { personalInfo, projects, socials } from "../data/projects";
+import Footer from "../components/Footer";
+import ProjectModal from "../components/ProjectModal";
+import { ServiceMarquee, PerksGrid, ProcessSteps, FinalCTA } from "../components/HomeExtras";
+import { useState } from "react";
+import { useScrollReveal } from "../hooks/useScrollReveal";
+import {
+  Globe,
+  Github,
+  Facebook,
+  Twitter,
+  Youtube,
+  Linkedin,
+  Download,
+  ArrowRight,
+  ExternalLink,
+} from "lucide-react";
+
+const SOCIAL_ICONS = [
+  { href: socials.website, Icon: Globe, label: "Website" },
+  { href: socials.github, Icon: Github, label: "GitHub" },
+  { href: socials.facebook, Icon: Facebook, label: "Facebook" },
+  { href: socials.twitter, Icon: Twitter, label: "Twitter / X" },
+  { href: socials.youtube, Icon: Youtube, label: "YouTube" },
+  { href: socials.linkedin, Icon: Linkedin, label: "LinkedIn" },
+];
+
+/** Only this small line re-renders while typing, not the whole page. */
+function TypewriterRole({ words }) {
+  const role = useTypewriter(words, 75, 1800);
+  return (
+    <div className="hero-role">
+      <span>{role}</span>
+      <span className="cursor-blink">|</span>
+    </div>
+  );
+}
+
+export default function HomeSection({ setActive }) {
+  const { t, isAr } = useLang();
+  const roles = isAr ? personalInfo.rolesAr : personalInfo.roles;
+  const featured = projects.filter(p => p.featured);
+  const [selected, setSelected] = useState(null);
+  const belowRef = useScrollReveal();
+
+  return (
+    <>
+      {/* Hero — full viewport, no section wrapper */}
+      <div className="hero">
+        <div
+          className="hero-wallpaper"
+          aria-hidden="true"
+          style={{
+            "--wall-dark": `url(${ASSETS["/hero/wallpaper-dark.webp"]})`,
+            "--wall-light": `url(${ASSETS["/hero/wallpaper-light.webp"]})`,
+          }}
+        />
+        <div className="hero-badge">
+          <span className="dot" />
+          {t(personalInfo.availability, personalInfo.availabilityAr)}
+        </div>
+
+        <h1 className="hero-name">
+          {isAr ? (
+            <>
+              مرحباً، أنا <em>يوسف</em>
+            </>
+          ) : (
+            <>
+              Hi, I'm <em>Youssef</em>
+            </>
+          )}
+        </h1>
+
+        <TypewriterRole words={roles} />
+
+        <p className="hero-bio">
+          {t(personalInfo.bioBrief, personalInfo.bioBriefAr)}
+        </p>
+
+        <div className="hero-actions">
+          <button
+            className="btn-primary btn-glow btn-ripple"
+            onClick={() => setActive("contact")}
+            data-hover
+          >
+            {t("Start a Project", "ابدأ مشروعك")}
+            <ArrowRight size={16} className="flip-rtl" />
+          </button>
+          <a
+            href={ASSETS["/resume.pdf"]}
+            download
+            className="btn-outline btn-ripple"
+            data-hover
+          >
+            <Download size={15} strokeWidth={2} />
+            {t("Resume", "السيرة الذاتية")}
+          </a>
+        </div>
+
+        <div className="hero-socials">
+          {SOCIAL_ICONS.map(({ href, Icon, label }) => (
+            <a
+              key={label}
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="social-icon"
+              title={label}
+              aria-label={label}
+              data-hover
+            >
+              <Icon size={17} strokeWidth={1.8} />
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <ServiceMarquee />
+
+      {/* Below hero — perks, projects, process, CTA + footer */}
+      <div ref={belowRef}>
+        <PerksGrid />
+        <div className="home-projects-wrap">
+          <div className="home-projects-header reveal">
+            <h2 className="home-projects-heading">
+              {t("Selected work", "أعمال مختارة")}
+            </h2>
+            <button
+              className="home-view-all"
+              onClick={() => setActive("projects")}
+              data-hover
+            >
+              {t("View All", "عرض الكل")} <ArrowRight size={15} className="flip-rtl" />
+            </button>
+          </div>
+
+          <div className="home-projects-grid">
+            {featured.map((p, i) => (
+              <div
+                key={p.id}
+                className={`home-project-card reveal reveal-delay-${i + 1}`}
+                onClick={() => setSelected(p)}
+                data-hover
+              >
+                <div className="home-project-img">
+                  {p.image ? (
+                    <img src={p.image} alt={p.name} loading="lazy" />
+                  ) : (
+                    <div className="home-project-placeholder" />
+                  )}
+                </div>
+                <div className="home-project-body">
+                  <div className="home-project-name">
+                    {isAr && p.nameAr ? p.nameAr : p.name}
+                  </div>
+                  <p className="home-project-desc">
+                    {(isAr && p.descriptionAr
+                      ? p.descriptionAr
+                      : p.description
+                    ).slice(0, 90)}
+                    …
+                  </p>
+                  <div className="home-project-tags">
+                    {p.tags.slice(0, 3).map(tag => (
+                      <span key={tag} className="tag">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="home-project-actions">
+                    {p.github && (
+                      <a
+                        href={p.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={e => e.stopPropagation()}
+                        className="home-project-icon-btn"
+                        title="GitHub"
+                        data-hover
+                      >
+                        <Github size={16} strokeWidth={2} />
+                      </a>
+                    )}
+                    {p.live && (
+                      <a
+                        href={p.live}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={e => e.stopPropagation()}
+                        className="home-project-icon-btn"
+                        title="Live"
+                        data-hover
+                      >
+                        <ExternalLink size={16} strokeWidth={2} />
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <ProcessSteps />
+
+        <div style={{ maxWidth: 1080, margin: "0 auto", padding: "0 24px" }}>
+          <FinalCTA setActive={setActive} />
+        </div>
+
+        <div style={{ maxWidth: 960, margin: "0 auto", padding: "0 24px" }}>
+          <Footer setActive={setActive} />
+        </div>
+      </div>
+
+      {selected && (
+        <ProjectModal project={selected} onClose={() => setSelected(null)} />
+      )}
+    </>
+  );
+}
